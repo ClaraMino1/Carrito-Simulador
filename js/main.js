@@ -8,7 +8,6 @@ const productos = [
      "titulo":"Pedagogia integral por niveles de profundidad",
      "precio": 10.500,
     "imagen": "https://minoydavila.com.ar/wp-content/uploads/2025/02/Pedagogia-integral-por-niveles-de-profundidad_1600-400x636.jpg"
-
     },
     {"id": 3,
      "titulo":"La anti-vida y el destino cósmico",
@@ -24,9 +23,7 @@ const productos = [
      "titulo":"Educacion critica e inclusion",
      "precio": 17.900,
      "imagen": "https://minoydavila.com.ar/wp-content/uploads/2025/01/Educacion-critica-e-inclusion_1600-400x617.jpg"
-
     }
-    
 ]
 
 const carrito = []; //carrito inicial vacio
@@ -77,9 +74,8 @@ if(productos.length === 0){ //si no hay libros
 
 
     const button = document.createElement("button"); //crea un boton
+    button.classList.add("producto-boton");
     button.innerText = "Añadir al carrito"; //valor del boton
-
-    
 
 
     //inserta los elementos al dom
@@ -88,7 +84,14 @@ if(productos.length === 0){ //si no hay libros
     nuevoProducto.append(link,precioElemento,button)
     })
 
-    
+    const botones = document.querySelectorAll('.producto-boton'); // Selecciona todos los elementos con la clase 'producto-boton'
+
+//     //cada vez que se haga click en un boton
+//     botones.forEach(boton => {
+//      boton.addEventListener("click", () => {
+        
+//      });
+//  });
     
 }
 
@@ -97,10 +100,4 @@ if(productos.length === 0){ //si no hay libros
 
 
 
-// const botones = document.querySelectorAll('.producto-boton'); // Selecciona todos los elementos con la clase 'producto-boton'
 
-// botones.forEach(boton => {
-//     boton.addEventListener("click", () => {
-//         //logica
-//     });
-// });

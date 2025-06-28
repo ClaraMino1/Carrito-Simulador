@@ -1,29 +1,42 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilos generales*/
+/* Estilos generales para el body */
 body {
     font-family: sans-serif;
     margin: 20px;
     background-color: #f4f4f4;
     color: #333;
 }
-#titulo{
-    padding: 10px;
+
+/* Contenedor principal para productos y carrito */
+.container-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espacio entre la sección de productos y el carrito */
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-#subtitulo{
-    padding: 10px;
+/* Estilos para el carrito */
+#carrito {
+    height: auto;
+    width: 300px; /* Ancho fijo para el carrito */
+    background-color: #c1c1c1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Evita que el carrito se encoja */
+}
+
+#carrito h3, #carrito p {
+    text-align: center;
 }
 
 /* Contenedor principal de la sección de productos */
 section {
+    flex-grow: 1; /* Permite que la sección de productos ocupe el espacio restante */
     display: grid;
-    /* 3 columnas. Se ajusta con media queries. */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Calcula el número de columnas basado en el espacio disponible y el tamaño de los ítems */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     padding: 20px;
     background-color: #fff;
@@ -45,49 +58,50 @@ section {
 }
 
 .producto:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* enlaces de los productos */
+/* Estilos para los enlaces de los productos */
 .producto a {
     text-decoration: none;
-    color: inherit; /* Hereda el color del padre para el texto del enlace */
+    color: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-/*título del producto */
+/* Estilos para el título del producto */
 .producto-titulo {
     font-size: 1.2em;
     margin-bottom: 10px;
     color: #0056b3;
-    height: 3em; /* Altura fija para evitar que el layout se mueva si los títulos son de diferente longitud */
-    overflow: hidden; /* Oculta el texto que exceda la altura */
+    height: 3em;
+    overflow: hidden;
 }
 
-/*imagen del producto */
+/* Estilos para la imagen del producto */
 .producto-img {
     max-width: 100%;
+    height: auto;
     border-radius: 4px;
     margin-bottom: 15px;
     object-fit: cover;
-    max-height: 250px; /* Altura máxima para las imágenes */
+    max-height: 250px;
 }
 
-/*precio del producto */
+/* Estilos para el precio del producto */
 .producto-precio {
     font-size: 1.3em;
     font-weight: bold;
     color: #28a745;
-    margin-top: auto; /* Empuja el precio y el botón hacia abajo */
+    margin-top: auto;
     margin-bottom: 15px;
 }
 
-/*boton*/
-.producto button {
+/* Estilos para el boton*/
+.producto-boton {
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -96,21 +110,32 @@ section {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.2s ease-in-out;
-    width: 90%; /*ancho del producto */
+    width: 90%;
 }
 
-.producto button:hover {
+.producto-boton:hover {
     background-color: #0056b3;
 }
 
-/* --- Media Queries--- */
+/* --- Media Queries --- */
 
-/* (tablets y celulares) */
-@media (max-width: 768px) {
+/* tablets y mobiles*/
+@media (max-width: 992px) { /* Ajustado para pantallas donde el carrito podría apilarse */
+    .container-main {
+        flex-direction: column; /* Apila los elementos en una columna */
+        align-items: center; /* Centra los elementos apilados */
+    }
+
+    #carrito {
+        width: 100%; /* El carrito ocupa todo el ancho */
+        margin-bottom: 20px; /* Espacio debajo del carrito cuando está apilado */
+    }
+
     section {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 2 columnas en pantallas más pequeñas */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 2 o más columnas en el grid de productos */
         gap: 20px;
         padding: 15px;
+        width: 100%; /* La sección de productos ocupa todo el ancho */
     }
 
     .producto-titulo {
@@ -122,7 +147,7 @@ section {
     }
 }
 
-/* mas pequeño(celulares) */
+/* mobile*/
 @media (max-width: 480px) {
     section {
         grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
