@@ -1,3 +1,9 @@
+/*MEJORAS FUTURAS
+    LocalStorage para el carrito
+    Ver precios en carrito y una suma total al final(reduce)
+    poder buscar un libro(filter)
+*/
+
 const productos = [
     {"id": 1,
      "titulo":"Libertad y cuerpo",
