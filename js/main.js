@@ -80,7 +80,7 @@ if(productos.length === 0){ //si no hay libros muestra no hay publicaciones disp
     button.innerText = "Añadir al carrito"; //valor del boton
 
 
-    //inserta los elementos al dom
+    //inserta la estructura html de libros al dom
     seccionProductos.append(nuevoProducto); 
     link.append(tituloProducto,img);
     nuevoProducto.append(link,precioElemento,button)
@@ -95,9 +95,16 @@ if(productos.length === 0){ //si no hay libros muestra no hay publicaciones disp
     //le crea un evento a cada boton
     for (let i = 0; i < boton.length; i++) {
         boton[i].addEventListener('click', function() {
-            carrito.push("item agregado") //aca se deberia mostrar el nombre del producto con su precio y luego un total
+
+            /*acá lo que estoy haciendo es moverme en la jerarquia para poder llegar al h3 que contiene el titulo del libro para luego usarlo en el push*/
+            const pProducto = this.previousElementSibling;
+            const aProducto = pProducto.previousElementSibling;
+            const nombreProducto = aProducto.firstElementChild;
+           
+            carrito.push(nombreProducto.innerText) //aca se deberia mostrar el nombre del producto con su precio y luego un total
             actualizarCarritoDOM();
     })};
+    
     
     
     function actualizarCarritoDOM(){
