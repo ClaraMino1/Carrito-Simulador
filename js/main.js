@@ -7,7 +7,7 @@ const productos = [
     {"id": 2,
      "titulo":"Pedagogia integral por niveles de profundidad",
      "precio": 10.500,
-    "imagen": "https://minoydavila.com.ar/wp-content/uploads/2025/02/Pedagogia-integral-por-niveles-de-profundidad_1600-400x636.jpg"
+     "imagen": "https://minoydavila.com.ar/wp-content/uploads/2025/02/Pedagogia-integral-por-niveles-de-profundidad_1600-400x636.jpg"
     },
     {"id": 3,
      "titulo":"La anti-vida y el destino cósmico",
@@ -24,16 +24,18 @@ const productos = [
      "precio": 17.900,
      "imagen": "https://minoydavila.com.ar/wp-content/uploads/2025/01/Educacion-critica-e-inclusion_1600-400x617.jpg"
     }
-]
+];
 
-const carrito = []; //carrito inicial vacio
-
-const subtitulo = document.getElementById("subtitulo")
-let seccionProductos = document.getElementsByTagName("section");
+const subtitulo = document.getElementById("subtitulo") //obtiene el subtitulo
+let seccionProductos = document.getElementsByTagName("section");//obtiene el section
+const carritoElemento = document.getElementById("carrito");//obtiene el aside carrito
 
 seccionProductos = seccionProductos[0];
 
-if(productos.length === 0){ //si no hay libros
+if(productos.length === 0){ //si no hay libros muestra no hay publicaciones disponibles y elimina el carrito
+    const tituloCarrito = carritoElemento.querySelector("h3"); //obtiene el titulo del carrito para posteriormente poder borrarlo
+    carritoElemento.removeAttribute("id") //elimina el id que referencia a los estilos del carrito
+    carritoElemento.removeChild(tituloCarrito)//borra el h3 titulo del carrito
     subtitulo.innerText = "no hay publicaciones disponibles"
 }else{ //si hay libros, los crea dinamicamente en el dom
 
@@ -83,17 +85,42 @@ if(productos.length === 0){ //si no hay libros
     link.append(tituloProducto,img);
     nuevoProducto.append(link,precioElemento,button)
     })
-
-    const botones = document.querySelectorAll('.producto-boton'); // Selecciona todos los elementos con la clase 'producto-boton'
-
-//     //cada vez que se haga click en un boton
-//     botones.forEach(boton => {
-//      boton.addEventListener("click", () => {
-        
-//      });
-//  });
-    
 }
+    //      ----LOGICA CARRITO------
+    const carrito = []; //carrito inicial vacio
+    const listaCarrito = document.getElementById("lista-carrito");//ul
+    const boton = document.getElementsByClassName("producto-boton")// Selecciona todos los elementos con la clase 'producto-boton'
+    const itemVacio = document.createElement("li");//crea un item para mostrar el carrito vacio
+
+    //le crea un evento a cada boton
+    for (let i = 0; i < boton.length; i++) {
+        boton[i].addEventListener('click', function() {
+            carrito.push("item agregado") //aca se deberia mostrar el nombre del producto con su precio y luego un total
+            actualizarCarritoDOM();
+    })};
+    
+    
+    function actualizarCarritoDOM(){
+        if(carrito.length === 0){ //si el carrito está vacío dice que no hay productos
+            itemVacio.innerText = "Aún no hay productos en el carrito"
+            listaCarrito.append(itemVacio)
+        }else{//si hay productos en el carrito los muestra
+            
+            listaCarrito.innerHTML = ''; //limpia el carrito
+            
+            // 2. Iterar sobre cada producto del carrito
+            carrito.forEach(producto => {
+                const itemCarrito = document.createElement("li");//por cada producto del array crea un item de carrito
+                itemCarrito.innerText = producto; // Asigna el nombre del producto al li
+                listaCarrito.append(itemCarrito); // muestra el li en el dom
+            });
+        }
+    }
+    
+   
+
+actualizarCarritoDOM(); //muestra que el carrito está vacío al cargar la página
+
 
 
 
