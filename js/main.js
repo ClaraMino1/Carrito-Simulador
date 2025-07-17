@@ -1,7 +1,9 @@
 /*MEJORAS FUTURAS
-    LocalStorage para el carrito
-    falta suma total al final(reduce)
-    poder buscar un libro(filter)
+
+-corregir los decimales en el carrito
+-limitar los decimales en la suma total del carrito
+- LocalStorage para el carrito
+-poder buscar un libro(filter)
 */
 
 const productos = [
@@ -99,11 +101,21 @@ if(productos.length === 0){ //si no hay libros muestra no hay publicaciones disp
     const carrito = []; //carrito inicial vacio (array de objetos)
     const listaCarrito = document.getElementById("lista-carrito");//ul
     const boton = document.getElementsByClassName("producto-boton")// Selecciona todos los elementos con la clase 'producto-boton'
-    const itemVacio = document.createElement("li");//crea un item para mostrar el carrito vacio
+    const itemVacio = document.createElement("li");//crea un item para mostrar el carrito vaciov
+
+    const total = document.createElement("h3")//crea un h3 para mostrar el total al final de la ul
+    total.innerText = "" //por defecto la suma total es vacía
+    carritoElemento.append(total)
 
     function anadirAlCarrito(producto){ //recibe(objeto) el producto clickeado
         carrito.push(producto)
         actualizarCarritoDOM()
+        sumaTotal() //calcular el total
+    }
+
+    function sumaTotal(){
+        const suma = carrito.reduce((acc, producto)=> acc + producto.precio ,0) //va acumulando el total
+        total.innerText = "total $" + suma
     }
 
     function actualizarCarritoDOM(){
